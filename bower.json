@@ -1,13 +1,13 @@
 {
-  "name": "webduino-module-face",
-  "description": "face-api Module for Webduino",
-  "main": "face.js",
+  "name": "webduino-module-videoSensor",
+  "description": "videoSensor Module for Webduino",
+  "main": "actor.js",
   "authors": "",
   "license": "MIT",
   "keywords": [
     "arduino",
     "webduino",
-    "face-api"
+    "actor"
   ],
   "ignore": [
     "**/.*",

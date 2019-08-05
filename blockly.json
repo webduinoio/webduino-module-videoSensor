@@ -14,12 +14,13 @@
     "blockly/javascript.js"
   ],
   "dependencies": [
+    "adapter.js",
+    "webRTC.js",
     "camera.js",
     "opencv.js",
     "imageFilter.js",
     "actor.js",
     "HotSpot.js",
-    "HotBlock.js",
     "waspot-blockly.js"
   ],
   "msg": "blockly/msg",

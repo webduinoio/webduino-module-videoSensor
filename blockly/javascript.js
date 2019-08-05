@@ -1,4 +1,3 @@
-
 Blockly.JavaScript['waspot_ctrl_video'] = function (block) {
   var variable_video = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('video'), Blockly.Variables.NAME_TYPE);
   var id = Blockly.JavaScript.valueToCode(block, 'videoId', Blockly.JavaScript.ORDER_ATOMIC);
@@ -97,7 +96,6 @@ Blockly.JavaScript['waspot_create_actor'] = function (block) {
   var code = variable_actor + ' = new Actor(cv,{\n';
   code += '"stage":' + variable_camera + ',\n';
   code += '"img":' + text_imgURL + ',\n';
-  //code += '"snd":"' + text_sndURL + '",\n';
   code += '"pos":[0,0,' + text_width + ',' + text_height + ']\n});\n';
   code += variable_actor + '.start();\n';
   return code;
@@ -112,4 +110,3 @@ Blockly.JavaScript['waspot_get_camera'] = function (block) {
   var code = variable_camera + ' = createCamera("' + text_src + '",' + screenSize + ',' + checkbox_rotate + ',' + checkbox_flip + ');\n';
   return code;
 };
-

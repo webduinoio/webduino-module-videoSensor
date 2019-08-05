@@ -20,7 +20,7 @@ Blockly.Blocks['waspot_ctrl_video'] = {
     this.setNextStatement(true, null);
     this.setColour(290);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
+    this.setHelpUrl('https://webduino.io/');
   }
 };
 
@@ -43,7 +43,7 @@ Blockly.Blocks['waspot_setting_video'] = {
     this.setNextStatement(true, null);
     this.setColour(135);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
+    this.setHelpUrl('https://webduino.io/');
   }
 };
 
@@ -59,7 +59,7 @@ Blockly.Blocks['waspot_ctrl_video_action'] = {
     this.setNextStatement(true, null);
     this.setColour(130);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
+    this.setHelpUrl('https://webduino.io/');
   }
 };
 
@@ -74,7 +74,7 @@ Blockly.Blocks['waspot_show_actor'] = {
     this.setNextStatement(true, null);
     this.setColour(120);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
+    this.setHelpUrl('https://webduino.io/');
   }
 };
 
@@ -92,7 +92,7 @@ Blockly.Blocks['waspot_set_snd_url_actor'] = {
     this.setNextStatement(true, null);
     this.setColour(120);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
+    this.setHelpUrl('https://webduino.io/');
   }
 };
 
@@ -107,7 +107,7 @@ Blockly.Blocks['waspot_play_audio_actor'] = {
     this.setNextStatement(true, null);
     this.setColour(120);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
+    this.setHelpUrl('https://webduino.io/');
   }
 };
 
@@ -125,7 +125,7 @@ Blockly.Blocks['waspot_touch_actor'] = {
     this.setNextStatement(true, null);
     this.setColour(30);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
+    this.setHelpUrl('https://webduino.io/');
   }
 };
 
@@ -148,7 +148,7 @@ Blockly.Blocks['waspot_reloadimg_actor'] = {
     this.setNextStatement(true, null);
     this.setColour(120);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
+    this.setHelpUrl('https://webduino.io/');
   }
 };
 
@@ -166,7 +166,7 @@ Blockly.Blocks['waspot_loadimg_actor'] = {
     this.setNextStatement(true, null);
     this.setColour(120);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
+    this.setHelpUrl('https://webduino.io/');
   }
 };
 
@@ -187,7 +187,7 @@ Blockly.Blocks['waspot_move_actor'] = {
     this.setNextStatement(true, null);
     this.setColour(120);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
+    this.setHelpUrl('https://webduino.io/');
   }
 };
 
@@ -206,7 +206,7 @@ Blockly.Blocks['waspot_set_image_size'] = {
     this.setNextStatement(true, null);
     this.setColour(120);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
+    this.setHelpUrl('https://webduino.io/');
   }
 };
 
@@ -238,7 +238,7 @@ Blockly.Blocks['waspot_create_actor'] = {
     this.setNextStatement(true, null);
     this.setColour(330);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
+    this.setHelpUrl('https://webduino.io/');
   }
 };
 
