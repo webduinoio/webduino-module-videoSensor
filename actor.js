@@ -5,6 +5,7 @@ class Actor {
     self.cv = cv;
     self.info = info;
     self.img = null;
+    self.swapping = false;
     self.imgReady = false;
     self.touching = false;
     this.lastInsideTime = -1;
@@ -14,8 +15,9 @@ class Actor {
     self.body = document.getElementsByTagName('body')[0];
     self.originImgURL = info.img;
     self.originSize = [info.pos[3], info.pos[4]];
-    self.setImg(info.img, info.pos);
-    self.hide();
+    self.setImg(info.img, info.pos, function () {
+      self.hide();
+    });
     if (typeof info.snd == 'undefined') {
       info.snd = "";
     }
@@ -29,7 +31,7 @@ class Actor {
       "touchTime": 1000,
       "filter": ["e5", "g1", "d3"]
     };
-    self.onTouchCallback = function () { };
+    self.onTouchCallback = function () {};
     self.setTracking({
       'inside': function (pos) {
         var nowTime = new Date().getTime();
@@ -60,13 +62,17 @@ class Actor {
 
   switchImg(url, switchTime) {
     var self = this;
+    if (self.swapping || self.touching) return;
+    self.swapping = true;
     self.jsonInfo.touchTime = switchTime * 1000;
-    if (self.touching) return;
     var lastPos = [self.x, self.y, self.width, self.height];
-    self.setImg(url, lastPos);
-    setTimeout(function () {
-      self.setImg(self.originImgURL, lastPos);
-    }, self.jsonInfo.touchTime);
+    self.setImg(url, lastPos, function () {
+      setTimeout(function () {
+        self.setImg(self.originImgURL, lastPos, function () {
+          self.swapping = false;
+        });
+      }, self.jsonInfo.touchTime);
+    });
   }
 
   setSndURL(url) {
@@ -80,13 +86,14 @@ class Actor {
     this.img.style.height = this.height + 'px';
   }
 
-  setImg(url, pos) {
+  setImg(url, pos, callback) {
     var self = this;
     if (arguments.length == 1) {
       pos = [self.x, self.y];
     }
-    if (self.img != null && self.imgReady) {
-      self.body.removeChild(this.img);
+    if (self.img != null && self.img.parentElement != null) {
+      var parentEle = self.img.parentElement;
+      parentEle.removeChild(self.img);
     }
     var canvas = self.stage.getCanvas();
     self.img = new Image();
@@ -94,9 +101,15 @@ class Actor {
     self.img.onload = function () {
       self.imgReady = true;
       this.style.position = 'absolute';
-      this.style.left = self.getCanvas().offsetLeft + pos[0] + 'px';
-      this.style.top = self.getCanvas().offsetTop + pos[1] + 'px';
+      var left = self.getCanvas().offsetLeft + pos[0];
+      var top = self.getCanvas().offsetTop + pos[1];
+      this.style.left = left + 'px';
+      this.style.top = top + 'px';
       self.body.appendChild(this);
+      self.moveArray.push([self.x, self.y]);
+      if (typeof callback != 'undefined') {
+        callback();
+      }
     };
     self.img.src = url;
     self.x = pos[0];
@@ -168,7 +181,6 @@ class Actor {
         x, y + this.height);
     this.tracking.setFlip(this.isFlip);
     this.tracking.jsonInfo = this.jsonInfo;
-    //this.tracking.debug();
     this.tracking.setCvProcess(this.cv.imgFilter);
 
     if (typeof callback['inside'] == "function") {
@@ -183,14 +195,19 @@ class Actor {
   start() {
     var self = this;
     self.stage.onReady(function () {
-      console.log("stage ready , Actor start...","0419");
+      console.log("stage ready , Actor start...", "0806");
       self.tracking.start();
       self.running = true;
       for (var i = 0; i < self.moveArray.length; i++) {
-        self.moveTo(self.moveArray.shift());
+        self.moveTo(self.moveArray.pop());
       }
     });
     self.stage.onCanvas(function (c) {
+      if (self.moveArray.length > 0 && self.imgReady) {
+        for (var i = 0; i < self.moveArray.length; i++) {
+          self.moveTo(self.moveArray.pop());
+        }
+      }
       self.showTime();
     });
   }

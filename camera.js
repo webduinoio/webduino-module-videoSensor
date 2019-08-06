@@ -135,15 +135,15 @@ var Camera = (function () {
           };
           var self = this;
           navigator.mediaDevices.getUserMedia(constraints).
-            then(function (stream) {
-              if (self.video) {
-                self.video.srcObject = stream;
-              }
-            }).catch(function (error) {
-              console.log('Error: ', error);
-            });
+          then(function (stream) {
+            if (self.video) {
+              self.video.srcObject = stream;
+            }
+          }).catch(function (error) {
+            console.log('Error: ', error);
+          });
           break;
-        /* WebRTC */
+          /* WebRTC */
         case wsCam:
           console.log("WebRTC:", this.camType);
           ConnectWebSocket(this.URL);
@@ -203,13 +203,13 @@ var Camera = (function () {
     onCanvas(eleOrId, callback) {
       var self = this;
       //check if it's callback function
-      if (arguments.length == 1
-        && typeof eleOrId == 'function') {
+      if (arguments.length == 1 &&
+        typeof eleOrId == 'function') {
         callback = eleOrId;
         eleOrId = this.getCanvas();
       }
       if (typeof callback == 'undefined') {
-        callback = function () { };
+        callback = function () {};
       }
       this.onCanvasCallbackList.push(callback);
       var canvas = self.getEle(eleOrId);
@@ -228,7 +228,7 @@ var Camera = (function () {
             window.remoteVideo = self.video = video;
             video.onloadeddata = function () {
               var loop = function () {
-                if (self.cnt++ == 30 /* skip 30 frame*/) {
+                if (self.cnt++ == 30 /* skip 30 frame*/ ) {
                   for (var i = 0; i < self.onReadyCallbackList.length; i++) {
                     self.onReadyCallbackList[i]();
                   }
@@ -253,6 +253,9 @@ var Camera = (function () {
                 self.onCanvasCallbackList[i](self.canvas, video);
               }
             });
+            for (var i = 0; i < self.onReadyCallbackList.length; i++) {
+              self.onReadyCallbackList[i]();
+            }
             break;
           case imgStreamCam:
             var ele = document.createElement('img');
@@ -271,6 +274,9 @@ var Camera = (function () {
               requestAnimationFrame(loop);
             }
             requestAnimationFrame(loop);
+            for (var i = 0; i < self.onReadyCallbackList.length; i++) {
+              self.onReadyCallbackList[i]();
+            }
             break;
           case videoStreamCam:
             var video = self.createVideo();
