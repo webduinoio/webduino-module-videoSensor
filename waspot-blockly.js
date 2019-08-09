@@ -34,6 +34,8 @@
     if (rotate) {
       cam.setRotate(90);
     }
+    c1.style.position='absolute';
+    c1.style.top='0';
     return cam;
   }
 }(window, window.webduino));

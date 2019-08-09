@@ -203,7 +203,10 @@ var Camera = (function () {
     onCanvas(eleOrId, callback) {
       var self = this;
       //check if it's callback function
-      if (arguments.length == 1 &&
+      if (arguments.length == 0) {
+        callback = function () {};
+        eleOrId = this.getCanvas();
+      } else if (arguments.length == 1 &&
         typeof eleOrId == 'function') {
         callback = eleOrId;
         eleOrId = this.getCanvas();
