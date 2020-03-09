@@ -16,18 +16,15 @@ class Actor {
     self.originSize = [info.pos[3], info.pos[4]];
     self.setImg(info.img, info.pos);
     self.hide();
-    if (typeof info.snd == 'undefined') {
-      info.snd = "";
-    }
     self.audio = new Audio(info.snd);
     self.jsonInfo = {
-      "history": 500,
+      "history": 100,
       "varThreshold": 25,
-      "learningRate": 0.0025,
+      "learningRate": 0.001,
       "detectShadows": false,
-      "objMinSize": 10,
+      "objMinSize": 3,
       "touchTime": 1000,
-      "filter": ["e5", "g1", "d3"]
+      "filter": ["e2", "g1", "d3"]
     };
     self.onTouchCallback = function () { };
     self.setTracking({
@@ -60,24 +57,13 @@ class Actor {
 
   switchImg(url, switchTime) {
     var self = this;
-    self.jsonInfo.touchTime = switchTime * 1000;
     if (self.touching) return;
+    self.jsonInfo.touchTime = switchTime * 1000;
     var lastPos = [self.x, self.y, self.width, self.height];
     self.setImg(url, lastPos);
     setTimeout(function () {
       self.setImg(self.originImgURL, lastPos);
     }, self.jsonInfo.touchTime);
-  }
-
-  setSndURL(url) {
-    this.audio = new Audio(url);
-  }
-
-  setImgSize(width, height) {
-    this.width = width;
-    this.height = height;
-    this.img.style.width = this.width + 'px';
-    this.img.style.height = this.height + 'px';
   }
 
   setImg(url, pos) {
@@ -183,7 +169,7 @@ class Actor {
   start() {
     var self = this;
     self.stage.onReady(function () {
-      console.log("stage ready , Actor start...","0419");
+      //console.log("stage ready , Actor start..");
       self.tracking.start();
       self.running = true;
       for (var i = 0; i < self.moveArray.length; i++) {
