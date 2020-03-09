@@ -1,4 +1,4 @@
-# webduino-module-waspot
+# webduino-module-videoSensor
 
 Webduino Module for waspot
 
@@ -6,7 +6,7 @@ Webduino Module for waspot
 ## Installation
 
 ```shell
-bower install https://github.com/webduinoio/webduino-module-face-api.git
+bower install https://github.com/webduinoio/webduino-module-videoSensor.git
 ```
 
 ## License

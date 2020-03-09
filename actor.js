@@ -23,13 +23,13 @@ class Actor {
     }
     self.audio = new Audio(info.snd);
     self.jsonInfo = {
-      "history": 500,
+      "history": 100,
       "varThreshold": 25,
-      "learningRate": 0.0025,
+      "learningRate": 0.001,
       "detectShadows": false,
-      "objMinSize": 10,
+      "objMinSize": 3,
       "touchTime": 1000,
-      "filter": ["e5", "g1", "d3"]
+      "filter": ["e2", "g1", "d3"]
     };
     self.onTouchCallback = function () {};
     self.setTracking({
@@ -195,7 +195,7 @@ class Actor {
   start() {
     var self = this;
     self.stage.onReady(function () {
-      console.log("stage ready , Actor start...", "0806");
+      //console.log("stage ready , Actor start...", "0806");
       self.tracking.start();
       self.running = true;
       for (var i = 0; i < self.moveArray.length; i++) {

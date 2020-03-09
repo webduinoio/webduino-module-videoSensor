@@ -307,6 +307,35 @@ var Camera = (function () {
             video.muted = 'true';
             video.play();
             break;
+          case videoStreamCam:
+            var video = self.createVideo();
+            console.log("start videoStream Cam");
+            window.remoteVideo = self.video = video;
+            var sourceMP4 = document.createElement("source");
+            video.appendChild(sourceMP4);
+            sourceMP4.type = "video/mp4";
+            sourceMP4.src = self.URL;
+            //
+            video.onloadeddata = function () {
+              var loop = function () {
+                for (var i = 0; i < self.onReadyCallbackList.length; i++) {
+                  self.onReadyCallbackList[i]();
+                }
+                var ctx = canvas.getContext('2d');
+                self.rotateImg(video, canvas, self.rotate, true);
+                if (self.onCanvasCallbackList.length > 0) {
+                  for (var i = 0; i < self.onCanvasCallbackList.length; i++) {
+                    self.onCanvasCallbackList[i](self.canvas, video);
+                  }
+                }
+                requestAnimationFrame(loop);
+              }
+              requestAnimationFrame(loop);
+            }
+            video.autoplay = 'autoplay';
+            video.muted = 'true';
+            video.play();
+            break;
         }
       });
       return this;
