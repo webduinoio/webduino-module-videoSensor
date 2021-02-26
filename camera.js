@@ -93,13 +93,19 @@ var Camera = (function () {
 
     enumerateDevices(cb) {
       var self = this;
-      return new Promise(function (resolve, reject) {
-        navigator.mediaDevices.enumerateDevices()
-          .then(function (o) {
-            self.gotDevices(self, o);
-            if (cb) cb();
-            resolve();
-          }).catch(self.handleError);
+      return new Promise(function(resolve, reject) {
+        navigator.mediaDevices
+          .getUserMedia({ video: true })
+          .then(function (mediaStream) {
+            navigator.mediaDevices
+              .enumerateDevices()
+              .then(function (o) {
+                self.gotDevices(self, o);
+                if (cb) cb();
+                resolve();
+              })
+              .catch(self.handleError);
+          });
       });
     }
 
